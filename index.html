@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合同会社月心 | Lunar Heart, LLC </title>
+    
+    <!-- Google Fonts -->
+    <linkpreconnect="https://fonts.googleapis.com">
+    <linkpreconnect="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            main: '#2C3E50',    // 指定: メインカラー
+                            accent: '#E74C3C',  // 指定: アクセントカラー
+                            bg: '#ECF0F1',      // 指定: 背景色
+                            darkBg: '#1a252f',  // ダークモード用背景
+                            darkCard: '#243442' // ダークモード用カード背景
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        english: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* カスタムアニメーション用スタイル */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 画像オーバーレイのグラデーション */
+        .hero-overlay {
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.5));
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-brand-main dark:bg-brand-darkBg dark:text-gray-100 transition-colors duration-300 font-sans antialiased">
+
+    <!-- Header / Navigation -->
+    <header class="fixed w-full top-0 z-50 bg-white/90 dark:bg-brand-darkCard/90 backdrop-blur-md shadow-sm transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-english text-2xl font-bold tracking-tighter text-brand-main dark:text-white">
+                        <span class="text-brand-accent">L</span>unar <span class="text-brand-accent">H</span>eart
+                    </a>
+                </div>
+
+                <!-- Desktop Menu & Dark Mode Toggle -->
+                <div class="flex items-center gap-6">
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent dark:hover:text-brand-accent font-medium transition-colors">Home</a>
+                        <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent dark:hover:text-brand-accent font-medium transition-colors">About</a>
+                        <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent dark:hover:text-brand-accent font-medium transition-colors">Services</a>
+                        <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-brand-accent dark:hover:text-brand-accent font-medium transition-colors">Contact</a>
+                    </nav>
+
+                    <!-- Dark Mode Button -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
+                        <i data-lucide="moon" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                        <i data-lucide="sun" class="w-5 h-5 block dark:hidden text-brand-main"></i>
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-brand-darkCard border-t dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-brand-bg dark:hover:bg-gray-700">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-brand-bg dark:hover:bg-gray-700">About</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-brand-bg dark:hover:bg-gray-700">Services</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-brand-bg dark:hover:bg-gray-700">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- 1. Hero Section -->
+        <section id="home" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Office Background" class="w-full h-full object-cover">
+                <!-- Overlay -->
+                <div class="absolute inset-0 hero-overlay"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto text-white fade-up">
+                <h1 class="font-english text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
+                    Lunar Heart,<br class="md:hidden" /> <span class="text-brand-accent">合同会社</span> 月心
+                </h1>
+                <p class="text-base md:text-xl lg:text-2xl font-medium opacity-90 leading-relaxed max-w-3xl mx-auto">
+                    確かなマンション管理の力で、<br class="hidden md:block" />
+                    市民の皆様の生活に潤いを。
+                </p>
+                <div class="mt-10">
+                    <a href="#contact" class="inline-block bg-brand-accent hover:bg-red-500 text-white font-bold py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-lg">
+                        お問い合わせ
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </div>
+        </section>
+
+        <!-- 2. About Section -->
+        <section id="about" class="py-24 px-4 sm:px-6 lg:px-8 bg-white dark:bg-brand-darkCard transition-colors duration-300">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 relative inline-block">
+                        弊社は？
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-brand-accent rounded-full"></span>
+                    </h2>
+                    <p class="text-gray-500 dark:text-gray-400 mt-4">Who we are</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                    <!-- Profile Image -->
+                    <div class="w-full md:w-1/2 flex justify-center fade-up">
+                        <div class="relative">
+                            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-brand-accent/20 shadow-2xl relative z-10">
+                                <!-- Placeholder for "Clean Casual Woman Illustration" -->
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                     alt="代表プロフィール画像" 
+                                     class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <!-- Decorative Circle -->
+                            <div class="absolute top-4 -left-4 w-64 h-64 md:w-80 md:h-80 rounded-full border-2 border-brand-main/20 dark:border-white/10 z-0"></div>
+                        </div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="w-full md:w-1/2 fade-up" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-bold mb-6 text-brand-main dark:text-white">
+                            マンション管理とITの融合で、<br>
+                            <span class="text-brand-accent">新しい価値</span>を創造します。
+                        </h3>
+                        <div class="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p>
+                                はじめまして、合同会社月心です。
+                            </p>
+                            <p>
+                                私たちは、地域の住宅の安定的な供給を企業理念とする、不動産賃貸借、マンション管理の会社です。
+                            </p>
+                            <p>
+                                また、インターネットを利用した各種情報提供サービスにも取り組んでいます。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- (Bonus) Service Summary Section to fill layout -->
+        <section id="services" class="py-24 px-4 bg-brand-bg dark:bg-brand-darkBg transition-colors duration-300">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 fade-up">
+                    <h2 class="text-3xl font-bold mb-4">サービス内容</h2>
+                    <p class="text-gray-500 dark:text-gray-400">Our Services</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="bg-white dark:bg-brand-darkCard p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow fade-up delay-100">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="monitor" class="text-brand-accent w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 dark:text-white">マンション管理</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            かゆいところまで行き届いた管理体制を提供します。
+                        </p>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="bg-white dark:bg-brand-darkCard p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow fade-up delay-200">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="smartphone" class="text-brand-accent w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 dark:text-white">ITの活用</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">
+                            マンション管理をITで効率化します。
+                        </p>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-4 bg-brand-main text-white relative overflow-hidden">
+            <div class="max-w-4xl mx-auto text-center relative z-10 fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">Ready to start?</h2>
+                <p class="mb-10 text-gray-300 text-lg">
+                    マンション管理のご相談、お見積もりなど、お気軽にお問い合わせください。
+                </p>
+                <a href="mailto:lunarheart6868@gmail.com" class="inline-flex items-center gap-2 bg-brand-accent hover:bg-white hover:text-brand-accent text-white font-bold py-4 px-12 rounded-full transition-all duration-300 shadow-lg border-2 border-transparent hover:border-brand-accent">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    お問い合わせはこちら
+                </a>
+            </div>
+            <!-- Decorative circle -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-white/5 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-brand-accent/10 blur-3xl"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="font-english font-bold text-white">Lunar Heart</div>
+            <div class="text-sm">
+                &copy; 2026 Lunar Heart LLC. All Rights Reserved.
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-brand-accent transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="hover:text-brand-accent transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Dark Mode Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check local storage or system preference on load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // Toggle function
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // --- 2. Scroll Animation (Intersection Observer) ---
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing once visible to prevent re-triggering (optional)
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Select all elements with 'fade-up' class
+        const fadeElements = document.querySelectorAll('.fade-up');
+        fadeElements.forEach(el => observer.observe(el));
+
+        // --- 3. Initialize Icons ---
+        lucide.createIcons();
+    </script>
+</body>
+</html>
